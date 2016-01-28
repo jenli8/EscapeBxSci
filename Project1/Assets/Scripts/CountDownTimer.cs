@@ -23,6 +23,7 @@ public class CountDownTimer : MonoBehaviour {
 			GUI.Label (new Rect (50, 50, 250, 100), "Time Remaining:" + timeR, style);
 		} else {
 			GUI.Label (new Rect (50, 50, 250, 100), "Game Over", style);
+			//Application.Quit(); 
 		}
 	}
 }

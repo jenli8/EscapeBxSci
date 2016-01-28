@@ -45,11 +45,16 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Cha_Data\Script\ScreenShot.cs" />
+     <Compile Include="Assets\Scripts\AnimationScript.cs" />
      <Compile Include="Assets\Scripts\CountDownTimer.cs" />
      <Compile Include="Assets\Scripts\InstructionsDisplay.cs" />
      <Compile Include="Assets\Scripts\Motion.cs" />
+     <Compile Include="Assets\Scripts\Sounds.cs" />
+     <Compile Include="Assets\Scripts\Teleport.cs" />
      <None Include="Assets\PB_Spider\readme.txt" />
      <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
+     <None Include="Assets\Cha_Data\Shader\WrapLambert.shader" />
      <None Include="Assets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
      <None Include="Assets\Standard Assets\Environment\Water\Water\Shaders\FXWaterPro.shader" />
