@@ -14,7 +14,7 @@ public class InstructionsDisplay : MonoBehaviour {
 	void Update () {
 		timed -= Time.deltaTime; 
 		if (timed <= 0) {
-			gameObject.SetActive(false);
+			Destroy (gameObject);
 		}
 	}
 	

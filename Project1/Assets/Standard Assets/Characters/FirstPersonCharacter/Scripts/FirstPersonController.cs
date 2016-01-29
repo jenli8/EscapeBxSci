@@ -44,11 +44,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep;
         private bool m_Jumping;
         private AudioSource m_AudioSource;
-		private bool haveKey;
 
+		private bool haveKey;
+		private bool haveKey1;
+		private bool haveKey2;
 		int itemsCollected;
 		public Text keyText;
 		private float timeR;
+		public int health;
+		public bool won;
 
         // Use this for initialization
         private void Start()
@@ -64,7 +68,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
 
-			haveKey = false;
+			haveKey1 = false;
+			haveKey2 = false;
+			won = false;
 			timeR = 200;
 			SetText();
 			keyText.text = "";
@@ -273,22 +279,47 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		void OnTriggerEnter(Collider other)
 		{
 			if (other.gameObject.CompareTag ("key")) {
-				other.gameObject.SetActive (false);
-				haveKey = true;
+				Destroy(other.gameObject);
+				haveKey1 = true;
 				SetText();
 			}
-			if (other.gameObject.CompareTag ("door") && haveKey == true) {
+			if (other.gameObject.CompareTag ("key2")) {
+				Destroy(other.gameObject);
+				haveKey2 = true;
+				SetText();
+			}
+			if (other.gameObject.CompareTag ("door") && haveKey1 == true) {
 				Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
 				rb.constraints = RigidbodyConstraints.None;
+				won = true;
+				SetText ();
+			}
+			if (other.gameObject.CompareTag ("door2") && haveKey2 == true) {
+				Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
+				rb.constraints = RigidbodyConstraints.None;
+			}
+			if (other.gameObject.CompareTag ("slime")) {
+				health -= 1;
+				SetText();	
 			}
 		}
 
 		void SetText()
 		{
-			keyText.text = "Find the key!  " + "Time Remaining: " + timeR.ToString();
-			if (haveKey == true)
+			keyText.text = "Find the key to the staircase!  " + "Time Remaining: " + timeR.ToString() + " Health: " + health;
+			if (haveKey2 == true)
 			{
-				keyText.text = "You have the key.  " + "Time Remaining: " + timeR.ToString();
+				keyText.text = "You have the key to the staircase now find the key to the main enterance.  " + "Time Remaining: " + timeR.ToString()  + " Health: " + health;
+			}
+			if (haveKey1 == true)
+			{
+				keyText.text = "You have the key to the main enterance.  " + "Time Remaining: " + timeR.ToString()  + " Health: " + health;
+			}
+			if (health <= 0 || timeR <= 0) {
+				keyText.text = "Game Over";
+			}
+			if (won == true) {
+				keyText.text = "You have escaped Bronx Science!";
 			}
 		}
     }
